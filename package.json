@@ -1,0 +1,11 @@
+{
+  "name": "micro-apps",
+  "version": "1.0.0",
+  "description": "A remote technical challenge for front-end developers.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
