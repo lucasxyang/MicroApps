@@ -1,0 +1,18 @@
+{
+  "name": "micro-apps",
+  "description": "A remote technical challenge for front-end developers.",
+  "main": "app.js",
+  "authors": [
+    "yang4131 <yang4131@umn.edu>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

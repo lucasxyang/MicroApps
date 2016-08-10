@@ -2,10 +2,26 @@
   "name": "micro-apps",
   "version": "1.0.0",
   "description": "A remote technical challenge for front-end developers.",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "express": "^4.13.4",
+    "https": "^1.0.0",
+    "querystring": "^0.2.0",
+    "validator": "^5.2.0",
+    "winston": "^2.2.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-jscs": "^3.0.2",
+    "gulp-jshint": "^2.0.0",
+    "gulp-nodemon": "^2.0.6",
+    "jshint": "^2.9.2",
+    "jshint-stylish": "^2.2.0"
+  }
 }
