@@ -1,12 +1,14 @@
 // This is from official Payon website, https://docs.payon.com/tutorials/integration-guide
 // Prepares the checkout
 
+var LocalStorage = require('node-localstorage').LocalStorage;
 var http = require('https');
 var querystring = require('querystring');
 
 function request(callback) {
 	var path='/v1/checkouts';
 	var data = querystring.stringify( {
+        // the following three lines correspond to getStatus
 		'authentication.userId' : '8a8294174b7ecb28014b9699220015cc',
 		'authentication.password' : 'sy6KJsT8',
 		'authentication.entityId' : '8a8294174b7ecb28014b9699220015ca',
@@ -40,6 +42,28 @@ function request(callback) {
 	
 // the param is an async callback
 request( function(responseData) {
-	console.log(responseData);
 //    console.log('here5');
+	console.log(responseData);
+    
+//    if (typeof(Storage) !== "undefined") {
+//        console.log('storage not supported');
+//    }
+//    else {
+//        if (typeof localStorage === "undefined" || localStorage === null) {
+////            var LocalStorage = require('node-localstorage').LocalStorage;
+//            localStorage = new LocalStorage('./scratch');
+//        }
+//
+//        localStorage.setItem('myFirstKey', 'myFirstValue');
+////        console.log(localStorage.getItem('myFirstKey'));
+//        
+//        // node is back-end technology, and has no access to client side Window object
+////        Window.localStorage.setItem('myCat', 'Tom');
+////        console.log(Window.localStorage);
+////        console.log(typeof Storage);
+////        console.log(localStorage.getItem("key1"));
+//    }
+//    for(var e in responseData) {
+//        localStorage.setItem(e, responseData[e]);
+//    }
 });

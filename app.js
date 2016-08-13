@@ -35,15 +35,9 @@ app.use(bodyParser.json());
 //app.use('/api', apiRouter);
 // TODO: HTTP Error handling
 
-var nav = [{
-    Link: '/Books',
-    Text: 'Book'
-}, {
-    Link: '/Authors',
-    Text: 'Author'
-}];
-var testRoute = require('./src/controllers/testController.js');
-console.log('testRoute is ' + testRoute + ' , type is ' + typeof testRoute);
+
+var testRoute = require('./src/controllers/prepare.js');
+//console.log('testRoute is ' + testRoute + ' , type is ' + typeof testRoute);
 
 // Start the application server
 //
