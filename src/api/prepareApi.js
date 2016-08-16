@@ -9,14 +9,13 @@ var prepareApi = function () {
     
     // this sets up/prepares the checkout
     var setup = function () {
-        console.log(123);
+//        console.log('set up checkout successfully');
         prepareController.request( function(responseData) {
             console.log(responseData);
             if (typeof localStorage === "undefined" || localStorage === null) {
                 localStorage = new LocalStorage('./scratch');
             }
         });
-        
     };
     
     // this sends checkout info to front end
@@ -28,7 +27,7 @@ var prepareApi = function () {
         var localStorage = new LocalStorage('./scratch');
         var item = localStorage.getItem('myStorage1.json');
         
-//        prepareController.giveInfo();
+        prepareController.giveInfo();
         
 //        app.get('/api/test', function(req, res, next) {
 //        res.json({ message: 'Hello World' });

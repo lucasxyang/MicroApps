@@ -47,35 +47,9 @@ var prepareController = function () {
         postRequest.end();
     };
 
-    /*
-    // this is a function call to function above. Can and should be moved
-    // the param is an async callback
-    request( function(responseData) {
-    //    console.log('here5');
-        console.log(responseData);
-
-
-            if (typeof localStorage === "undefined" || localStorage === null) {
-    //            var LocalStorage = require('node-localstorage').LocalStorage;
-                localStorage = new LocalStorage('./scratch');
-            }
-
-
-            // node is back-end technology, and has no access to client side Window object
-    //        Window.localStorage.setItem('myCat', 'Tom');
-    //        console.log(Window.localStorage);
-    //        console.log(typeof Storage);
-    //        console.log(localStorage.getItem("key1"));
-
-    //    for(var e in responseData) {
-    //        localStorage.setItem(e, responseData[e]);
-    //    }
-
-    });
-    */
-    
     var giveInfo = function () {
         console.log(345);
+        
 //        app.get('/test', function(req, res, next) {
 //            res.json({ message: 'Hello World' });
 //        });

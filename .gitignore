@@ -41,3 +41,6 @@ node_modules
 
 # Custom files
 public/js/bundle.js
+
+# LocalStorage temp files
+scratch

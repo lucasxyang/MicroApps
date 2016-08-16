@@ -34,6 +34,10 @@ function request(callback) {
             localStorage.setItem('myStorage2.json', chunk);
             
 			jsonRes = JSON.parse(chunk);
+            
+            console.log(jsonRes.hasOwnProperty('id'));
+            // if-else overwrite-protection
+            
 			return callback(jsonRes);
 		});
 	});

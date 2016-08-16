@@ -24,7 +24,7 @@
                 // get response text
                 var rt = data.responseText;
                 // eliminate backslash (escapes from quote marks). b is a string
-                var no_bs = JSON.parse(rt);                
+                var no_bs = JSON.parse(rt);
                 // parse string to JSON object
                 var jo = JSON.parse(no_bs);
 
@@ -57,9 +57,7 @@
       
     <!--  the id has to be the new id that's just created, so to make this entire app work -->
 <!--    <script async src='https://test.oppwa.com/v1/paymentWidgets.js?checkoutId=D7C3293D3EB877F4DAC6B92B53A2D9EF.sbg-vm-tx02'></script>-->
-      
-      <!--script src="http://www.tc.umn.edu/~yang4131/simple.js"></script-->
-      
+            
       
     <script type="text/javascript">
         
@@ -67,7 +65,6 @@
         function myFunction(id) {
             // DO NOT name this variable 'location', otherwise the app will redirect
             var loc1 = 'https://test.oppwa.com/v1/paymentWidgets.js?checkoutId=' + id;
-//            console.log(loc1);
             $.ajaxSetup({ cache: true });
             $.getScript( loc1, function() {
                 $.ajaxSetup({ cache: false }); // this, and two lines above, are added per solution on http://stackoverflow.com/questions/28936138/prevent-jquery-getscript-adding-timestamp
