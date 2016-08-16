@@ -1,169 +1,107 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <meta charset="utf-8">
-    <title>PayOn Task</title>
-    <meta name="generator" content="Bootply" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <!--bower:css-->
-    <!--link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" /-->
-    <!--link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css" /-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" />
-    <!--endbower-->
-    
-    <!-- bower:js -->
-    <!--script src="/lib/jquery/dist/jquery.js"></script-->
-    <!--script src="/lib/bootstrap/dist/js/bootstrap.js"></script-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <!-- endbower -->
-    
-    <!-- inject:css-->
-    <link rel="stylesheet" href="/css/styles.css">
-    <!-- endinject-->
-    <!--inject:js-->
-    <script src="/js/app.js"></script>
-    <!--endinject-->
-    
-    <!--[if lt IE 9]>
-        <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    
-</head>
+  <head>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-<body>
-    
-    <header class="navbar navbar-bright navbar-fixed-top" role="banner">
-        <div class="container">
-            <div class="navbar-header">
-                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse"> 
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span> 
-                    <span class="icon-bar"></span> 
-                    <span class="icon-bar"></span> 
-                </button>
-                <a href="/" class="navbar-brand">Home</a>
-            </div>
-            <nav class="collapse navbar-collapse" role="navigation">
-                <ul class="nav navbar-nav">
-                    <li> <a href="https://docs.payon.com/reference/parameters">PayOn Docs </a> </li>
-                    <li> <a href="https://docs.payon.com/tutorials/integration-guide">Example</a> </li>
-                    <li> <a href="http://microapps.com/">MicroApps</a> </li>
-                    <li> <a href="#">About</a> </li>
-                </ul>
-                <ul class="nav navbar-right navbar-nav">
-                    <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-search"></i></a>
-                        <ul class="dropdown-menu" style="padding:12px;">
-                            <form class="form-inline">
-                                <button type="submit" class="btn btn-default pull-right"><i class="glyphicon glyphicon-search"></i></button>
-                                <input type="text" class="form-control pull-left" placeholder="Search"> </form>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-    
-    <div id="masthead">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8">
-                    <h1>Best&nbsp;Payment&nbsp;Solution</h1> 
-                </div>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div id="container1" class="container"></div>
+      <div id="show"></div>
+    <script src="https://fb.me/react-0.13.3.js"></script>
+    <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
+    <script type="text/jsx" src="script.jsx"></script>
+      
+    <script id='script1'>
+        localStorage.clear();
+        $.ajax({
+            url: '/api/test',
+            complete: function(data) {
+                // get response text
+                var rt = data.responseText;
+                // eliminate backslash (escapes from quote marks). b is a string
+                var no_bs = JSON.parse(rt);                
+                // parse string to JSON object
+                var jo = JSON.parse(no_bs);
+
+                var result = jo.result;
+                var buildNumber = jo.buildNumber;
+                var timestamp = jo.timestamp;
+                var ndc = jo.ndc;
+                var id = jo.id;
+
+                if (typeof(Storage) !== "undefined") {
+                    // store
+                    localStorage.setItem("result_code", result.code);
+                    localStorage.setItem("result_description", result.description);
+                    localStorage.setItem("buildNumber", buildNumber);
+                    localStorage.setItem("timestamp", timestamp);
+                    localStorage.setItem("ndc", ndc);
+                    localStorage.setItem("id", id);
+
+                    // show only id
+                    document.getElementById("show").innerHTML = localStorage.getItem("id");
+                } else {
+                    document.getElementById("show").innerHTML = "Sorry, your browser does not support Web Storage...";
+                }
                 
-                <div class="col-md-4">
-                    <div class="well well-lg"></div>
-                </div>
-            </div>
-        </div>
+                myFunction2(id);
+            }
+        });
         
-        <!-- /cont -->
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <!--div class="top-spacer"> </div-->
-                </div>
-            </div>
-        </div>
-        <!-- /cont -->
+    </script>
+      
+    <!--  the id has to be the new id that's just created, so to make this entire app work -->
+<!--    <script async src='https://test.oppwa.com/v1/paymentWidgets.js?checkoutId=D7C3293D3EB877F4DAC6B92B53A2D9EF.sbg-vm-tx02'></script>-->
+      
+      <!--script src="http://www.tc.umn.edu/~yang4131/simple.js"></script-->
+      
+      
+    <script type="text/javascript">
         
-    </div>
-    
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <!--script src="https://test.oppwa.com/v1/paymentWidgets.js?checkoutId={checkoutId}"></script-->
-                
-                
-                <!-- The example on https://docs.payon.com/tutorials/integration-guide/customisation will keep appending payments' id and resourcePath to the end of form action. See example code below (3 payments) -->
-                
-                <!--form action="https://docs.payon.com/tutorials/integration-guide/customisation
-                              ?id=65175237F67C9E833DC285B1B0E071B3.sbg-vm-tx02
-                              &resourcePath=%2Fv1%2Fcheckouts%2F65175237F67C9E833DC285B1B0E071B3.sbg-vm-tx02%2Fpayment
-                              &id=00A51260080A922A3EAC62155B494E3D.sbg-vm-tx02
-                              &resourcePath=%2Fv1%2Fcheckouts%2F00A51260080A922A3EAC62155B494E3D.sbg-vm-tx02%2Fpayment
-                              &id=5764AC210CDD303C1B2351FF063D4485.sbg-vm-tx02
-                              &resourcePath=%2Fv1%2Fcheckouts%2F5764AC210CDD303C1B2351FF063D4485.sbg-vm-tx02%2Fpayment" class="paymentWidgets">VISA MASTER AMEX</form-->
-                
-                <!-- appending url-decoded resourcePath to domain https://test.oppwa.com/ will show the json object that has all the important payment information -->
-                
-                <!-- <form action="{shopperResultUrl}" class="paymentWidgets">VISA MASTER AMEX</form> -->
-                <!-- {shopperResultUrl} is the page on your site where the customer should be redirected to after the payment is processed and the brands that will be available. -->
-                <form action="https://www.google.com" class="paymentWidgets">VISA MASTER AMEX DISCOVER</form>
-                
-                <script>
-                    var wpwlOptions = {
-                        style: "card"
-                    }
-                </script>
-                <script async src='https://test.oppwa.com/v1/paymentWidgets.js?checkoutId=D50C558B8458683A187A315545FB723F.sbg-vm-tx02'></script>
-                
-                
-                <!--div class="panel">
-                    <div class="panel-body">
-                        <a href="/" class="btn btn-primary pull-right btnNext">More <i class="glyphicon glyphicon-chevron-right"> </i> </a> 
-                    </div>
-                </div-->
-                
-            </div>
-        </div>
-    </div>
-    
-    <hr>
-    
-    <!--div class="container" id="footer">
-        <div class="row">
-            <div class="col col-sm-12">
-                <h1>Follow Us</h1>
-                <div class="btn-group"> 
-                    <a class="btn btn-twitter btn-lg" href="#"><i class="icon-twitter icon-large"></i> Twitter</a>
-                    <a class="btn btn-facebook btn-lg" href="#"><i class="icon-facebook icon-large"></i> Facebook</a>
-                    <a class="btn btn-google-plus btn-lg" href="#"><i class="icon-google-plus icon-large"></i> Google+</a>
-                </div>
-            </div>
-        </div>
-    </div-->
-    
-    <hr>
-    <hr>
-    
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6">
+        // this function will not run until called
+        function myFunction(id) {
+            // DO NOT name this variable 'location', otherwise the app will redirect
+            var loc1 = 'https://test.oppwa.com/v1/paymentWidgets.js?checkoutId=' + id;
+//            console.log(loc1);
+            $.ajaxSetup({ cache: true });
+            $.getScript( loc1, function() {
+                $.ajaxSetup({ cache: false }); // this, and two lines above, are added per solution on http://stackoverflow.com/questions/28936138/prevent-jquery-getscript-adding-timestamp
+            });
+        };
+        
+        function myFunction2 (id) {
+            var loc1 = 'https://test.oppwa.com/v1/paymentWidgets.js?checkoutId=' + id;
+            var tag = document.createElement("script");
+            tag.type = 'text/javascript';
+            tag.async = true;
+            tag.src = loc1;
+//            tag.innerHTML="alert(1)";
+            document.getElementById('script1').appendChild(tag); //can be append to any object other than body
+        }
+        
 
-                </div>
-                <div class="col-sm-6">
-                    <p class="pull-right">Built with <i class="icon-heart-empty"></i> at <a href="http://www.bootply.com">Bootply</a></p>
-                </div>
-            </div>
-        </div>
-    </footer>
-    
-</body>
+        // this will incur CORS warning
+//        $.ajax('http://www.tc.umn.edu/~yang4131/simple.js', {
+//            datatype: "script"
+//            async: false
+//        })
+        
+        // this will not!
+//        $.getScript( "http://www.tc.umn.edu/~yang4131/simple.js", function( data, textStatus, jqxhr ) {
+//          console.log( data ); // Data returned
+//          console.log( textStatus ); // Success
+//          console.log( jqxhr.status ); // 200
+//          console.log( "Load was performed." );
+//        });
+    </script>
+
+      
+      
+  </body>
 
 </html>

@@ -1,0 +1,74 @@
+#1
+{"id":"8a82944a5693d3290156944992cc516d","paymentType":"DB","paymentBrand":"VISA","amount":"92.00","currency":"EUR","descriptor":"1457.3913.7698 OPP_Channel","result":{"code":"000.100.110","description":"Request successfully processed in 'Merchant in Integrator Test Mode'"},"card":{"bin":"420000","last4Digits":"0000","holder":"fe8h","expiryMonth":"12","expiryYear":"2034"},"threeDSecure":{"eci":"07"},"risk":{"score":"0"},"buildNumber":"5838c301ec1265920497315b9d395217f2fd57bb@2016-08-16 07:15:16 +0000","timestamp":"2016-08-16 16:57:45+0000","ndc":"19484DA1A350F623FF0C2CB0DF2DFD03.sbg-vm-tx02"}
+
+
+#1 formatted
+{"id":"8a82944a5693d3290156944992cc516d",
+"paymentType":"DB",
+"paymentBrand":"VISA",
+"amount":"92.00",
+"currency":"EUR",
+"descriptor":"1457.3913.7698 OPP_Channel",
+"result":
+    {"code":"000.100.110",
+    "description":"Request successfully processed in 'Merchant in Integrator Test Mode'"},
+"card":
+    {"bin":"420000",
+    "last4Digits":"0000",
+    "holder":"fe8h",
+    "expiryMonth":"12",
+    "expiryYear":"2034"},
+"threeDSecure":{"eci":"07"},
+"risk":{"score":"0"},
+"buildNumber":"5838c301ec1265920497315b9d395217f2fd57bb@2016-08-16 07:15:16 +0000",
+"timestamp":"2016-08-16 16:57:45+0000",
+"ndc":"19484DA1A350F623FF0C2CB0DF2DFD03.sbg-vm-tx02"}
+
+
+#2
+{ id: '8a82944a5693d3290156944af5a751cc',
+  paymentType: 'DB',
+  paymentBrand: 'AMEX',
+  amount: '92.00',
+  currency: 'EUR',
+  descriptor: '3518.9756.7906 OPP_Channel',
+  result: 
+   { code: '000.100.110',
+     description: 'Request successfully processed in \'Merchant in Integrator Test Mode\'' },
+  card: 
+   { bin: '377777',
+     last4Digits: '7770',
+     holder: 'fadi',
+     expiryMonth: '03',
+     expiryYear: '2032' },
+  threeDSecure: { eci: '07' },
+  risk: { score: '0' },
+  buildNumber: '5838c301ec1265920497315b9d395217f2fd57bb@2016-08-16 07:15:16 +0000',
+  timestamp: '2016-08-16 16:59:16+0000',
+  ndc: 'A53724A8136AD71A02597A394E476F03.sbg-vm-tx02' }
+
+
+#3 (visa 3D)
+{ id: '8a82944a5693d32901569451bd0a5682',
+  paymentType: 'DB',
+  paymentBrand: 'VISA',
+  amount: '92.00',
+  currency: 'EUR',
+  descriptor: '7540.1388.0994 OPP_Channel',
+  result: 
+   { code: '000.100.110',
+     description: 'Request successfully processed in \'Merchant in Integrator Test Mode\'' },
+  card: 
+   { bin: '471110',
+     last4Digits: '0000',
+     holder: 'cdoqiuh',
+     expiryMonth: '12',
+     expiryYear: '2034' },
+  threeDSecure: 
+   { eci: '05',
+     verificationId: 'AAACAgSRBklmQCFgMpEGAAAAAAA=',
+     xid: 'CAACCVVUlwCXUyhQNlSXAAAAAAA=' },
+  risk: { score: '0' },
+  buildNumber: '5838c301ec1265920497315b9d395217f2fd57bb@2016-08-16 07:15:16 +0000',
+  timestamp: '2016-08-16 17:06:47+0000',
+  ndc: '113683DDE08CE45022BF437CBC7253BC.sbg-vm-tx02' }

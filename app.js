@@ -26,18 +26,23 @@ var PORT = process.env.PORT || 5000;
 app.use(express.static('public'));
 app.use(express.static('src/views'));
 
+//app.set('view engine', 'ejs');
+
 // Enable reading POST data in URL-encoded and JSON formats
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Routes configuration
-//var apiRouter = require('./src/routes/apiRoutes')(knex);
-//app.use('/api', apiRouter);
+var apiRouter = require('./src/routes/apiRoutes')();
+app.use('/api', apiRouter);
 // TODO: HTTP Error handling
 
+//app.get('/', function(req, res) {
+//    res.json({ message: 'Hello World' });
+//});
 
-var testRoute = require('./src/controllers/prepare.js');
-//console.log('testRoute is ' + testRoute + ' , type is ' + typeof testRoute);
+
+//var prepareController = require('./src/controllers/prepareController.js');
 
 // Start the application server
 //

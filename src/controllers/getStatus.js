@@ -4,9 +4,18 @@ https://test.oppwa.com/v1/checkouts/254257826F51439A7E86087EBB9F54F7.sbg-vm-tx01
 
 var http = require('https');
 var querystring = require('querystring');
+var LocalStorage = require('node-localstorage').LocalStorage;
+var json1 = require('../../scratch/myStorage1.json');
 
 function request(callback) {
-	var path='/v1/checkouts/59FB413151984356AF33846FEFC50895.sbg-vm-tx02/payment';
+//    console.log(typeof json1);
+//    console.log('<<<')
+//    console.log(json1);
+//    console.log('>>>')
+    var id = json1.id;
+    console.log(id);
+
+	var path='/v1/checkouts/' + id + '/payment';
     // the following three lines correspond to prepare
 	path += '?authentication.userId=8a8294174b7ecb28014b9699220015cc'
 	path += '&authentication.password=sy6KJsT8'
@@ -20,6 +29,10 @@ function request(callback) {
 	var postRequest = http.request(options, function(res) {
 		res.setEncoding('utf8');
 		res.on('data', function (chunk) {
+            // need write-protection here
+            localStorage = new LocalStorage('./scratch');
+            localStorage.setItem('myStorage2.json', chunk);
+            
 			jsonRes = JSON.parse(chunk);
 			return callback(jsonRes);
 		});
