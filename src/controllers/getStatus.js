@@ -12,10 +12,7 @@ var LocalStorage = require('node-localstorage').LocalStorage;
 var json1 = require('../../scratch/myStorage1.json');
 
 function request(callback) {
-//    console.log(typeof json1);
-//    console.log('<<<')
-//    console.log(json1);
-//    console.log('>>>')
+
     var id = json1.id;
     console.log(id);
 

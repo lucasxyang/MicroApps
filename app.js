@@ -37,14 +37,6 @@ var apiRouter = require('./src/routes/apiRoutes')();
 app.use('/api', apiRouter);
 // TODO: HTTP Error handling
 
-//app.get('/', function(req, res) {
-//    res.json({ message: 'Hello World' });
-//});
-
-
-
-//var prepareController = require('./src/controllers/prepareController.js');
-
 // Start the application server
 //
 app.listen(PORT, function(err) {

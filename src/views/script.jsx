@@ -1,3 +1,9 @@
+/////////////////////////////////////////////////
+// React components.
+//
+// @file:   script.jsx
+// @author: Xiaosiqi Yang
+/////////////////////////////////////////////////
 
 var PrerequisitePanel = React.createClass({
     
@@ -28,20 +34,21 @@ var PrerequisitePanel = React.createClass({
         // 4 un-hide the checkout form
         
         // 2
+//        console.log(event);
         event.preventDefault();
         $.ajax({
             type: 'POST',
             url: '/api/test/',
             data: this.state.basic,
             success: function() {
-                console.log('jq ajax success');
+//                console.log('jq ajax success');
             },
             error: function(jqXHR, textStatus, errorThrown) {
-                console.log('jq ajax error');
+//                console.log('jq ajax error');
                 console.log(errorThrown);
             }
         });
-        console.log(902);
+//        console.log(902);
         this.setState({clicked: true});
 
     },
@@ -50,6 +57,7 @@ var PrerequisitePanel = React.createClass({
         this.setState({clicked: false});
     },
 
+    /*
     componentDidMount: function () {
         var thisprerequisiteForm = this;
 
@@ -58,59 +66,68 @@ var PrerequisitePanel = React.createClass({
         // Therefore it is placed here inside componentDidMount so that the form is rendered first.
         $('#prerequisiteForm').validator().on('submit', function (e) {
             if (e.isDefaultPrevented()) {
+                console.log('is prevented');
                 // Handle the invalid form
             } else {
                 // Proceed with form submission if all input data is valid
-                thisprerequisiteForm.props.onFormSubmit(e);
+                thisprerequisiteForm._onClick(e);
             }
         });
-        // for further explanation see:  http://www.ofssam.com/forums/showthread.php?tid=64
     },
+    */
     
     render: function() {
-        console.log('901. ' + this.state.basic.currency + ' ' + this.state.basic.amount);
+//        console.log('901. ' + this.state.basic.currency + ' ' + this.state.basic.amount + this.state.clicked);
 
+        // 1
         if (this.state.clicked == false) {
             return (
                 <div className="col-sm-6 col-xs-12">
-                    <form id="prerequisiteForm">
-                        
-                        <div className="form-group">
-                            <label htmlFor="amount">Amount:</label>
-                            <div className="input-group">
-                                <div className="input-group-addon">
-                                    <i className="fa fa-money" aria-hidden="true"></i>
+                    <form id="prerequisiteForm" onSubmit={this._onClick} data-toggle="validator">
+                        <div className="row">
+                            <div className="col-lg-6 col-xs-12">
+                                <div className="form-group">
+                                    <label htmlFor="amount">Amount:</label>
+                                    <div className="input-group">
+                                        <div className="input-group-addon">
+                                            <i className="fa fa-money" aria-hidden="true"></i>
+                                        </div>
+
+                                        {/* putting a step here does not help because form default is prevented */}
+                                        <input type="number" id="amount" 
+                                            className="form-control" 
+                                            min="0.01" max="100" step="0.01"
+                                            pattern="[0-9]+(\.[0-9][0-9]?)?" 
+                                            data-error="Only positive number with max 2 decimal places" 
+                                            onChange={this._onChange} 
+                                            value={this.state.basic.amount} 
+                                            required />
+
+                                    </div>
+                                    <div className="help-block with-errors"></div>
                                 </div>
-                                
-                                {/* putting a step here does not help because form default is prevented */}
-                                <input type="text" id="amount" pattern="[0-9]+(\.[0-9][0-9]?)?" data-error="Only positive number with max 2 decimal places" onChange={this._onChange} value={this.state.amount} />
+                            </div>
                             
-                            </div>
-                            <div className="help-block with-errors"></div>
-                        </div>
-                                
-                        <div className="form-group">
-                            <label htmlFor="currency">Currency: </label>
-                            <div className="input-group">
-                                <div className="input-group-addon">
-                                    <i className="fa fa-eur" aria-hidden="true"></i>
+                            <div className="col-lg-6 col-xs-12">
+                                <div className="form-group">
+                                    <label htmlFor="currency">Currency: </label>
+                                    <div className="input-group">
+                                        <div className="input-group-addon">
+                                            <i className="fa fa-eur" aria-hidden="true"></i>
+                                        </div>
+                                        <select id="currency" className="form-control" onChange={this._onChange} value={this.state.basic.currency} >
+                                            <option value="EUR">EUR</option>
+                                            <option value="USD">USD</option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <select id="currency" onChange={this._onChange} value={this.state.currency} >
-                                    <option value="EUR">EUR</option>
-                                    <option value="USD">USD</option>
-                                </select>
                             </div>
                         </div>
                         
-                        <label><input type="submit" value="Yes" onClick={this._onClick} /></label>
-
-                        {/*
-                        <label>
-                            <input type="submit" value="Yes" onClick={function(){this._onClick; this.props._onClick; }.bind(this)}/>
-                        </label>
-                        */}
-
-                        {/*<button onClick={function(){ this.foo1(); this.foo2(); }.bind(this)}> click me </button>*/}
+                        <div className="form-group">
+                            <input type="submit" value="Submit" className="btn btn-primary" />
+                        </div>
+                        
                     </form>
                 </div>
             );
@@ -133,20 +150,13 @@ var PrerequisitePanel = React.createClass({
 var CheckoutPanel = React.createClass({
     getInitialState: function () {
         return {
-            amount: 0,
-            currency: "EUR"
         };
     },
     
     
     componentDidMount: function() {
-//        var script = document.createElement("h2");
-//        script.innerHTML = "good";
-//        script.src = "https://use.typekit.net/foobar.js";
-//        script.async = true;
-//        document.getElementById('show').appendChild(script);
         
-        console.log(905);
+//        console.log(905);
         localStorage.clear();
         $.ajax({
             url: '/api/test',
@@ -177,14 +187,13 @@ var CheckoutPanel = React.createClass({
                         localStorage.setItem("ndc", ndc);
                         localStorage.setItem("id", id);
                         // show only id
-                        document.getElementById("show").innerHTML = localStorage.getItem("id");
+//                        document.getElementById("show").innerHTML = localStorage.getItem("id");
                     }
                     else {
                         document.getElementById("show").innerHTML = "Sorry, your browser does not support Web Storage...";
                     }
                 }
                 console.log('id is ' + id);
-//                myFunction2(id);
                 
                 var loc1 = 'https://test.oppwa.com/v1/paymentWidgets.js?checkoutId=' + id;
                 var tag = document.createElement("script");
@@ -192,7 +201,6 @@ var CheckoutPanel = React.createClass({
                 tag.async = true;
                 tag.src = loc1;
                 document.getElementById('show').appendChild(tag); //can be append to any object other than body
-                
             }
             
         });
@@ -213,89 +221,56 @@ var CheckoutPanel = React.createClass({
             <div>
                 <form id="checkoutForm" action="http://localhost:5000/api/thank" className="paymentWidgets">VISA MASTER AMEX DISCOVER
                 </form>
-                <script>console.log(903);</script>
             </div>
         );
     }
 });
 
 
-var Input2 = React.createClass({
+var Payment = React.createClass({
     getInitialState: function () {
         return {
-            typed: ''
+            readyToCheckout: false
         };
     },
-    onChange: function (event) {
+    
+    _onChangeFlip: function () {
         this.setState({
-            typed: event.target.value
+            readyToCheckout: true
         });
     },
+    
     render: function () {
-        return (
-            <div>
-                <input type = "text" onChange = {this.onChange.bind(this)} /> You typed: 
-                <code> {this.state.typed} </code> 
-            </div>
-        )
+        console.log(this.state.readyToCheckout);
+        // 4
+        if (this.state.readyToCheckout == false) {
+            return (
+                <div id = "payment">
+                    <h2> Best Payment Solution </h2>
+                    <hr/>
+                    <div className = "clearfix">
+                        <div className = "row">
+                        <div className = "col-sm-3 col-xs-12"> </div>
+                        <PrerequisitePanel _onClick = {this._onChangeFlip} />
+                        <div className = "col-sm-3 col-xs-12"> </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+        // 3
+        else {
+            return (
+                <div id = "payment">
+                    <h2> Best Payment Solution </h2>
+                    <hr/>
+                    <div className = "clearfix">
+                        <CheckoutPanel />
+                    </div>
+                </div>
+            );
+        }
     }
 });
 
-
-
-
-
-var Payment = React.createClass({
-    getInitialState: function() {
-        return {
-            flip_p: 1
-        };
-    },
-
-    _onChangeFlip: function() {
-        this.setState( {flip_p : 2} );
-    },
-
-
-  render: function () {
-            console.log(this.state.flip_p);
-      
-      // 4
-      if (this.state.flip_p == 1) {
-          return (
-              <div id = "payment" >
-                  <h2> Play Nine </h2>
-                  <hr/>
-                  <div className = "clearfix" >
-                      <div className="col-sm-3"></div>
-                      <PrerequisitePanel _onClick = {this._onChangeFlip} />
-                      <div className="col-sm-3"></div>
-
-                      { /*<Input2 />
-                      <p> {this.state.flip_p} </p> */}
-                  </div>
-              </div>
-          );
-      }
-      
-      // 3
-      else {
-          return ( 
-              <div id = "payment">
-                  <h2> Play Nine </h2>
-                  <hr />
-                  <div className = "clearfix">
-                      <CheckoutPanel />
-                      { /*<Input2 />
-                      <p> {this.state.flip_p} </p> */}
-                  </div>
-              </div>
-          );
-      }
-  }
-});
-
-React.render(
-  <Payment />,
-  document.getElementById('container1')
-);
+React.render( <Payment /> , document.getElementById('container1'));

@@ -1,4 +1,5 @@
 /* override bootstrap styles */
+/* from bootply example */
 @import url('http://fonts.googleapis.com/css?family=Oswald:300,400:latin,latin-ext');
 
 .navbar-form input, .form-inline input {
@@ -23,7 +24,6 @@ footer {
   background-color:#cecece;
  
 }
-
 
 #masthead {
   min-height:199px;

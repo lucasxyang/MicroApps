@@ -1,0 +1,146 @@
+/************************************************
+** Custom styles for the app's Bootstrap-based UI.
+**
+** @file:   titan.css
+** @author: Anurag Bhandari <anurag@ofssam.com>
+**          Dinesh Shenoy <astroshenoy@gmail.com>
+************************************************/
+
+.page-content.container {
+    padding: 60px 15px;
+}
+
+.navbar-default .navbar-nav>li>a.active,
+.navbar-default .navbar-nav>li>a.active:focus,
+.navbar-default .navbar-nav>li>a.active:hover {
+    background-color: #e7e7e7;
+}
+
+.navbar-inverse .navbar-nav>li>a.active,
+.navbar-inverse .navbar-nav>li>a.active:focus,
+.navbar-inverse .navbar-nav>li>a.active:hover {
+    color: white;
+    background-color: #080808;
+}
+
+.form-signin {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+    margin-bottom: 10px;
+}
+
+.form-signin .checkbox {
+    font-weight: normal;
+}
+
+.form-signin .form-control {
+    position: relative;
+    height: auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+
+.form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.form-signin .text-center {
+    margin-top: 10px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #f5f5f5;
+}
+
+.footer p.text-muted {
+    margin: 20px 0;
+}
+
+.team img {
+    width: 100px;
+    border-radius: 50%;
+    border: 3px solid grey;
+}
+
+#tabs {
+    border: 10px;
+}
+
+@media (max-width: 420px) {
+    .team img {
+        width: 50px;
+    }
+}
+
+.big {
+    font-size: 2.5em;
+}
+
+/* !important is dangerous. Tested working when removed. */
+.panel-cyan > .panel-heading {
+    background-color: #0fc0e8 !important;
+}
+
+.panel-purple > .panel-heading {
+    background-color: #db06f5 !important;
+}
+
+.panel-pink > .panel-heading {
+    background-color: #f506a0 !important;
+}
+
+.panel-red > .panel-heading {
+    background-color: #fd1b1b !important;
+}
+
+.panel-orange > .panel-heading {
+    background-color: #fb981e !important;
+}
+
+.panel-green > .panel-heading {
+    background-color: #88f95a !important;
+}
+
+#homePageLeads {
+    background-color: #0fc0e8;
+}
+
+#homePageContacts {
+    background-color: #88f95a;
+}
+
+#homePageAccts {
+    background-color: #fb981e;
+}
+
+#homePageQuotes {
+    background-color: #db06f5;
+}
+
+#homePageLinks {
+    color: #080808;
+}

@@ -1,28 +1,42 @@
+<!-----------------------------------------------
+-- The main view file.
+-- This is where React components get added to
+-- create a view.
+--
+-- @file:   index.html
+-- @author: Xiaosiqi Yang
+------------------------------------------------>
+
 <!DOCTYPE html>
 <html>
 
 <head>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
-    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-    
-    <link rel="stylesheet" href="/css/style1.css" /> </head>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" >
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+    <!-- Custom styles for this app -->
+    <!--link rel="stylesheet" href="/css/style1.css" /--> 
+</head>
 
 <body>
-    <div id="container1" class="container"></div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     
     <script src="https://fb.me/react-0.13.3.js"></script>
     <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
-    <script type="text/jsx" src="script.jsx"></script>
-    <script src="/js/validator.min.js"></script>
+    <script src="script.jsx" type="text/jsx"></script>
+    <script src="js/validator.min.js"></script>
 
-    <div id="show"></div>
+    <div id="container1" class="container"></div>
 
     <script>
         var wpwlOptions = {
             style: "card"
         };
     </script>
+    
+    <div id="show"></div>
     
 </body>
 
