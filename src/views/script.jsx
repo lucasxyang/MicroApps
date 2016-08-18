@@ -50,6 +50,23 @@ var PrerequisitePanel = React.createClass({
         this.setState({clicked: false});
     },
 
+    componentDidMount: function () {
+        var thisprerequisiteForm = this;
+
+        // NOTE: to get bootstrap validator working, this jQuery statement to attach .on('submit',...)
+        // must come after the the validations are enabled on the form (down in its children)
+        // Therefore it is placed here inside componentDidMount so that the form is rendered first.
+        $('#prerequisiteForm').validator().on('submit', function (e) {
+            if (e.isDefaultPrevented()) {
+                // Handle the invalid form
+            } else {
+                // Proceed with form submission if all input data is valid
+                thisprerequisiteForm.props.onFormSubmit(e);
+            }
+        });
+        // for further explanation see:  http://www.ofssam.com/forums/showthread.php?tid=64
+    },
+    
     render: function() {
         console.log('901. ' + this.state.basic.currency + ' ' + this.state.basic.amount);
 
@@ -57,16 +74,34 @@ var PrerequisitePanel = React.createClass({
             return (
                 <div className="col-sm-6 col-xs-12">
                     <form id="prerequisiteForm">
-                        <label>Amount: 
-                            {/* putting a step here does not help because form default is prevented */}
-                            <input type="number" id="amount" onChange={this._onChange} value={this.state.amount} />
-                        </label>
-                        <label>Currency: 
-                            <select id="currency" onChange={this._onChange} value={this.state.currency} >
-                                <option value="EUR">EUR</option>
-                                <option value="USD">USD</option>
-                            </select>
-                        </label>
+                        
+                        <div className="form-group">
+                            <label htmlFor="amount">Amount:</label>
+                            <div className="input-group">
+                                <div className="input-group-addon">
+                                    <i className="fa fa-money" aria-hidden="true"></i>
+                                </div>
+                                
+                                {/* putting a step here does not help because form default is prevented */}
+                                <input type="text" id="amount" pattern="[0-9]+(\.[0-9][0-9]?)?" data-error="Only positive number with max 2 decimal places" onChange={this._onChange} value={this.state.amount} />
+                            
+                            </div>
+                            <div className="help-block with-errors"></div>
+                        </div>
+                                
+                        <div className="form-group">
+                            <label htmlFor="currency">Currency: </label>
+                            <div className="input-group">
+                                <div className="input-group-addon">
+                                    <i className="fa fa-eur" aria-hidden="true"></i>
+                                </div>
+                                <select id="currency" onChange={this._onChange} value={this.state.currency} >
+                                    <option value="EUR">EUR</option>
+                                    <option value="USD">USD</option>
+                                </select>
+                            </div>
+                        </div>
+                        
                         <label><input type="submit" value="Yes" onClick={this._onClick} /></label>
 
                         {/*
