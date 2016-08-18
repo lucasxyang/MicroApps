@@ -15,7 +15,7 @@ var router = function (knex) {
     var checkoutApi = require('../api/checkoutApi')();
     
     // the following line runs checkoutApi
-// if node-localstorage has no content, enable this line to start the app
+// if node-localstorage has no content, enable this line to start the appl
 //    checkoutApi.setup();
     
     apiRouter.route('/test')
