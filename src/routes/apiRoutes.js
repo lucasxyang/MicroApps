@@ -12,16 +12,21 @@ var app = express();
 var router = function (knex) {
   
     
-    var prepareApi = require('../api/prepareApi')();
-//    console.log(typeof prepareApi);
+    var checkoutApi = require('../api/checkoutApi')();
     
-    // the following line runs prepareApi
-    prepareApi.setup();
+    // the following line runs checkoutApi
+// if node-localstorage has no content, enable this line to start the app
+//    checkoutApi.setup();
     
     apiRouter.route('/test')
-        .get(prepareApi.sendInfo);
+        .get(checkoutApi.displayInfo);
+    apiRouter.route('/test')
+        .post(checkoutApi.acceptParams);
     
     
+    apiRouter.get('/thank', function(req, res) {
+        res.json({ message: 'Hello World' });
+    });
 
     return apiRouter;
 };

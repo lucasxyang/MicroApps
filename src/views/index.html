@@ -1,104 +1,98 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
+<head>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
     <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    
+    <link rel="stylesheet" href="/css/style1.css" /> </head>
 
-    <link rel="stylesheet" href="style.css" />
-  </head>
-
-  <body>
+<body>
     <div id="container1" class="container"></div>
-      <div id="show"></div>
+    
     <script src="https://fb.me/react-0.13.3.js"></script>
     <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
     <script type="text/jsx" src="script.jsx"></script>
-      
+    <div id="show"></div>
+
     <script id='script1'>
         localStorage.clear();
         $.ajax({
             url: '/api/test',
-            complete: function(data) {
+            complete: function (data) {
+                
                 // get response text
                 var rt = data.responseText;
                 // eliminate backslash (escapes from quote marks). b is a string
                 var no_bs = JSON.parse(rt);
                 // parse string to JSON object
                 var jo = JSON.parse(no_bs);
-
-                var result = jo.result;
-                var buildNumber = jo.buildNumber;
-                var timestamp = jo.timestamp;
-                var ndc = jo.ndc;
-                var id = jo.id;
-
-                if (typeof(Storage) !== "undefined") {
-                    // store
-                    localStorage.setItem("result_code", result.code);
-                    localStorage.setItem("result_description", result.description);
-                    localStorage.setItem("buildNumber", buildNumber);
-                    localStorage.setItem("timestamp", timestamp);
-                    localStorage.setItem("ndc", ndc);
-                    localStorage.setItem("id", id);
-
-                    // show only id
-                    document.getElementById("show").innerHTML = localStorage.getItem("id");
-                } else {
-                    document.getElementById("show").innerHTML = "Sorry, your browser does not support Web Storage...";
-                }
                 
-                myFunction2(id);
-            }
-        });
-        
-    </script>
-      
-    <!--  the id has to be the new id that's just created, so to make this entire app work -->
-<!--    <script async src='https://test.oppwa.com/v1/paymentWidgets.js?checkoutId=D7C3293D3EB877F4DAC6B92B53A2D9EF.sbg-vm-tx02'></script>-->
+                if(jo === null)
+                    console.log('nothing');
+                else {
+                    var result = jo.result;
+                    var buildNumber = jo.buildNumber;
+                    var timestamp = jo.timestamp;
+                    var ndc = jo.ndc;
+                    var id = jo.id;
+
+                    if (typeof (Storage) !== "undefined") {
+                        // store
+                        localStorage.setItem("result_code", result.code);
+                        localStorage.setItem("result_description", result.description);
+                        localStorage.setItem("buildNumber", buildNumber);
+                        localStorage.setItem("timestamp", timestamp);
+                        localStorage.setItem("ndc", ndc);
+                        localStorage.setItem("id", id);
+                        // show only id
+                        document.getElementById("show").innerHTML = localStorage.getItem("id");
+                    }
+                    else {
+                        document.getElementById("show").innerHTML = "Sorry, your browser does not support Web Storage...";
+                    }
+                }
+                    myFunction2(id);
+                }
             
-      
+        });
+    </script>
+    
     <script type="text/javascript">
         
         // this function will not run until called
         function myFunction(id) {
             // DO NOT name this variable 'location', otherwise the app will redirect
             var loc1 = 'https://test.oppwa.com/v1/paymentWidgets.js?checkoutId=' + id;
-            $.ajaxSetup({ cache: true });
-            $.getScript( loc1, function() {
-                $.ajaxSetup({ cache: false }); // this, and two lines above, are added per solution on http://stackoverflow.com/questions/28936138/prevent-jquery-getscript-adding-timestamp
+            $.ajaxSetup({
+                cache: true
+            });
+            $.getScript(loc1, function () {
+                $.ajaxSetup({
+                    cache: false
+                }); // this, and two lines above, are added per solution on http://stackoverflow.com/questions/28936138/prevent-jquery-getscript-adding-timestamp
             });
         };
-        
-        function myFunction2 (id) {
+
+        function myFunction2(id) {
             var loc1 = 'https://test.oppwa.com/v1/paymentWidgets.js?checkoutId=' + id;
             var tag = document.createElement("script");
+//            tag.id = 'checkoutScript';
             tag.type = 'text/javascript';
             tag.async = true;
             tag.src = loc1;
-//            tag.innerHTML="alert(1)";
             document.getElementById('script1').appendChild(tag); //can be append to any object other than body
         }
         
-
-        // this will incur CORS warning
-//        $.ajax('http://www.tc.umn.edu/~yang4131/simple.js', {
-//            datatype: "script"
-//            async: false
-//        })
-        
-        // this will not!
-//        $.getScript( "http://www.tc.umn.edu/~yang4131/simple.js", function( data, textStatus, jqxhr ) {
-//          console.log( data ); // Data returned
-//          console.log( textStatus ); // Success
-//          console.log( jqxhr.status ); // 200
-//          console.log( "Load was performed." );
-//        });
     </script>
-
-      
-      
-  </body>
+    
+    <script>
+        var wpwlOptions = {
+            style: "card"
+        };
+    </script>
+    
+</body>
 
 </html>

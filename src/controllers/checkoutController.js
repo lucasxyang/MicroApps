@@ -5,11 +5,21 @@ var LocalStorage = require('node-localstorage').LocalStorage;
 var winston = require('winston');
 var http = require('https');
 var querystring = require('querystring');
-//var app = express();
-TEN = 10;
 
-var prepareController = function () {
+var checkoutController = function () {
 
+    var amount = 0;
+    var currency = '';
+    
+    var setAmount = function(newAmount) {
+        amount = newAmount;
+    };
+    
+    var setCurrency = function(newCurrency) {
+        currency = newCurrency;
+    };
+    
+    
     var request = function (callback) {
         var path='/v1/checkouts';
         var data = querystring.stringify( {
@@ -17,10 +27,15 @@ var prepareController = function () {
             'authentication.userId' : '8a8294174b7ecb28014b9699220015cc',
             'authentication.password' : 'sy6KJsT8',
             'authentication.entityId' : '8a8294174b7ecb28014b9699220015ca',
-            'amount' : '92.00',
-            'currency' : 'EUR',
+//            'amount' : '70.00',
+//            'currency' : 'EUR',
+            'amount' : amount,
+            'currency' : currency,
             'paymentType' : 'DB'
         });
+        
+        console.log(data);
+        
         var options = {
             port: 443,
             host: 'test.oppwa.com',
@@ -39,7 +54,6 @@ var prepareController = function () {
 
 
                 jsonRes = JSON.parse(chunk);
-    //            console.log('b4 return');
                 return callback(jsonRes);
             });
         });
@@ -49,19 +63,20 @@ var prepareController = function () {
 
     var giveInfo = function () {
         console.log(345);
-        
 //        app.get('/test', function(req, res, next) {
 //            res.json({ message: 'Hello World' });
 //        });
     };
     
     return {
-        request: request,
-        giveInfo: giveInfo
+        setAmount: setAmount,
+        setCurrency: setCurrency,
+        request: request
+//        giveInfo: giveInfo
     };
     
     
 
 };
 
-module.exports = prepareController;
+module.exports = checkoutController;
