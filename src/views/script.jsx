@@ -45,8 +45,7 @@ var PrerequisitePanel = React.createClass({
         var amt = this.state.basic.amount;
         if(amt == '' || amt == 0 || amt == null || amt == '0') {
             console.log('wrong' + amt + typeof this.state.basic.amount);
-        }
-        else {
+        } else {
             console.log(amt + typeof amt);
             
             localStorage.clear();
@@ -102,70 +101,93 @@ var PrerequisitePanel = React.createClass({
     render: function() {
 //        console.log('901. ' + this.state.basic.currency + ' ' + this.state.basic.amount + this.state.clicked);
 
-        // 1
-        if (this.state.clicked == false) {
-            return (
-                <div className="col-sm-6 col-xs-12">
-                    <form id="prerequisiteForm" onSubmit={this._onClick} data-toggle="validator">
-                        <div className="row">
-                            <div className="col-lg-6 col-xs-12">
-                                <div className="form-group">
-                                    <label htmlFor="amount">Amount:</label>
-                                    <div className="input-group">
-                                        <div className="input-group-addon">
-                                            <i className="fa fa-money" aria-hidden="true"></i>
-                                        </div>
-
-                                        {/* putting a step here does not help because form default is prevented */}
-                                        <input type="number" id="amount" 
-                                            className="form-control" 
-                                            min="0.01" max="100" step="0.01"
-                                            pattern="[0-9]+(\.[0-9][0-9]?)?" 
-                                            data-error="Only positive number with max 2 decimal places (0.00 ~ 100.00)" 
-                                            onChange={this._onChange} 
-                                            value={this.state.basic.amount} 
-                                            required />
-
-                                    </div>
-                                    <div className="help-block with-errors"></div>
-                                </div>
-                            </div>
-                            
-                            <div className="col-lg-6 col-xs-12">
-                                <div className="form-group">
-                                    <label htmlFor="currency">Currency: </label>
-                                    <div className="input-group">
-                                        <div className="input-group-addon">
-                                            <i className="fa fa-eur" aria-hidden="true"></i>
-                                        </div>
-                                        <select id="currency" className="form-control" onChange={this._onChange} value={this.state.basic.currency} >
-                                            <option value="EUR">EUR</option>
-                                            <option value="USD">USD</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div className="form-group">
-                            <input type="submit" value="Submit" className="btn btn-primary" />
-                        </div>
-                        
-                    </form>
-                </div>
-            );
-        }
+        var history = (new Date(localStorage.getItem("timestamp")));
+        var now = (new Date());
+        var diff = Math.abs(now - history);
+        const HOUR_IN_MILLISECONDS = 1 * 60 * 60 * 1000;
+        const TEN_SECONDS_IN_MILLISECONDS = 10 * 1000; // for testing
+        var frequencyLimit = HOUR_IN_MILLISECONDS;
         
+//        console.log(906);
+        
+        // 5
+        if (diff >= frequencyLimit) {
+            // 1
+            if (this.state.clicked == false) {
+                return (
+                    <div className="col-sm-6 col-xs-12">
+                        <form id="prerequisiteForm" onSubmit={this._onClick} data-toggle="validator">
+                            <div className="row">
+                                <div className="col-lg-6 col-xs-12">
+                                    <div className="form-group">
+                                        <label htmlFor="amount">Amount:</label>
+                                        <div className="input-group">
+                                            <div className="input-group-addon">
+                                                <i className="fa fa-money" aria-hidden="true"></i>
+                                            </div>
+
+                                            {/* putting a step here does not help because form default is prevented */}
+                                            <input type="number" id="amount" 
+                                                className="form-control" 
+                                                min="0.01" max="100" step="0.01"
+                                                pattern="[0-9]+(\.[0-9][0-9]?)?" 
+                                                data-error="Only positive number with max 2 decimal places (0.00 ~ 100.00)" 
+                                                onChange={this._onChange} 
+                                                value={this.state.basic.amount} 
+                                                required />
+
+                                        </div>
+                                        <div className="help-block with-errors"></div>
+                                    </div>
+                                </div>
+
+                                <div className="col-lg-6 col-xs-12">
+                                    <div className="form-group">
+                                        <label htmlFor="currency">Currency: </label>
+                                        <div className="input-group">
+                                            <div className="input-group-addon">
+                                                <i className="fa fa-eur" aria-hidden="true"></i>
+                                            </div>
+                                            <select id="currency" className="form-control" onChange={this._onChange} value={this.state.basic.currency} >
+                                                <option value="EUR">EUR</option>
+                                                <option value="USD">USD</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="form-group">
+                                <input type="submit" value="Submit" className="btn btn-primary" />
+                            </div>
+
+                        </form>
+                    </div>
+                );
+            }
+
+            else {
+                return (
+                    <div className="col-sm-6 col-xs-12">
+                        <p> Do you want to donate {this.state.basic.currency} {this.state.basic.amount} ? </p>
+                        <button onClick={this.props._onClick} >Confirm</button>
+                        <button onClick={this.cancelClick} >Cancel</button>
+                    </div>
+                );
+            } // end of clicked if-else
+        } // end of wait if
         else {
             return (
                 <div className="col-sm-6 col-xs-12">
-                    <p> Do you want to donate {this.state.basic.currency} {this.state.basic.amount} ? </p>
-                    <button onClick={this.props._onClick} >Confirm</button>
-                    <button onClick={this.cancelClick} >Cancel</button>
+                    <i className="fa fa-clock-o fa-5x" aria-hidden="true"></i>
+                    <h3> You made your last payment at {history.toLocaleString() } </h3>
+                    <h3> Please wait until one hour has passed. </h3>
+                    {/* <span className="glyphicon glyphicon-time" aria-hidden="true"></span> */}
                 </div>
             );
-        }
-    }
+        } // end of wait else
+        
+    } // end of render func
 });
 
 

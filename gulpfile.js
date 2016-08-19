@@ -13,9 +13,9 @@ var uglify = require('gulp-uglify');
 // Location of all JS files that need to be linted
 var JS_Files = ['*.js', 'src/**/*.js'];
 // Location of all JSX files
-var JSX_Files = ['src/views/*.js', 'src/views/*.jsx'];
+var JSX_Files = ['src/views/*.js', 'src/views/*.jsx', 'src/views/script.jsx'];
 // Location of all JS and JSX files
-var JS_And_JSX_Files = ['*.js', 'src/**/*.js', 'src/views/*.js', 'src/views/*.jsx'];
+var JS_And_JSX_Files = ['*.js', 'src/**/*.js', 'src/views/*.js', 'src/views/*.jsx', 'src/views/script.jsx'];
 
 // Gulp task to lint our JS files against JSCS and JSHint
 gulp.task('style', function() {
@@ -56,7 +56,8 @@ gulp.task('serve', ['style', 'jsx2js'], function () {
         env: {
             'PORT': 5000
         },
-        watch: JS_Files,
+//        watch: JS_Files,
+        watch: JS_And_JSX_Files,
         /*tasks: function (changedFiles) {
             var tasks = [];
             // TODO: condition to check whether client- or server-side code has changed;
