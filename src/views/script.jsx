@@ -5,13 +5,17 @@
 // @author: Xiaosiqi Yang
 /////////////////////////////////////////////////
 
+var React = require('react');
+var ReactDOM = require('react-dom');
+
+
 var PrerequisitePanel = React.createClass({
     
     getInitialState: function () {
         return {
             clicked: false,
             basic: {
-                amount: 0,
+                amount: '',
                 currency: "EUR"
             }
         };
@@ -32,25 +36,44 @@ var PrerequisitePanel = React.createClass({
         // 2 submit the basic parameter to checkoutController (, via checkoutApi)
         // 3 hide this current prerequisite form
         // 4 un-hide the checkout form
+        // 5 check the time
         
         // 2
 //        console.log(event);
-        event.preventDefault();
-        $.ajax({
-            type: 'POST',
-            url: '/api/test/',
-            data: this.state.basic,
-            success: function() {
-//                console.log('jq ajax success');
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-//                console.log('jq ajax error');
-                console.log(errorThrown);
+        
+        // number 0, string 0, null, empty string are invalid
+        var amt = this.state.basic.amount;
+        if(amt == '' || amt == 0 || amt == null || amt == '0') {
+            console.log('wrong' + amt + typeof this.state.basic.amount);
+        }
+        else {
+            console.log(amt + typeof amt);
+            
+            localStorage.clear();
+            if (typeof (Storage) !== "undefined") {
+                // store
+                localStorage.setItem("amount", amt);
+            } else {
+                document.getElementById("show").innerHTML = "Sorry, your browser does not support Web Storage...";
             }
-        });
-//        console.log(902);
-        this.setState({clicked: true});
-
+            
+            
+            event.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: '/api/test/',
+                data: this.state.basic,
+                success: function() {
+    //                console.log('jq ajax success');
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+    //                console.log('jq ajax error');
+                    console.log(errorThrown);
+                }
+            });
+    //        console.log(902);
+            this.setState({clicked: true});
+        }
     },
     
     cancelClick: function() {
@@ -98,7 +121,7 @@ var PrerequisitePanel = React.createClass({
                                             className="form-control" 
                                             min="0.01" max="100" step="0.01"
                                             pattern="[0-9]+(\.[0-9][0-9]?)?" 
-                                            data-error="Only positive number with max 2 decimal places" 
+                                            data-error="Only positive number with max 2 decimal places (0.00 ~ 100.00)" 
                                             onChange={this._onChange} 
                                             value={this.state.basic.amount} 
                                             required />
@@ -153,11 +176,10 @@ var CheckoutPanel = React.createClass({
         };
     },
     
-    
+    // This following block of code seems to be possible placed 
     componentDidMount: function() {
         
 //        console.log(905);
-        localStorage.clear();
         $.ajax({
             url: '/api/test',
             complete: function (data) {
@@ -188,8 +210,7 @@ var CheckoutPanel = React.createClass({
                         localStorage.setItem("id", id);
                         // show only id
 //                        document.getElementById("show").innerHTML = localStorage.getItem("id");
-                    }
-                    else {
+                    } else {
                         document.getElementById("show").innerHTML = "Sorry, your browser does not support Web Storage...";
                     }
                 }
@@ -234,14 +255,14 @@ var Payment = React.createClass({
         };
     },
     
-    _onChangeFlip: function () {
+    _onFlip: function () {
         this.setState({
             readyToCheckout: true
         });
     },
     
     render: function () {
-        console.log(this.state.readyToCheckout);
+//        console.log(this.state.readyToCheckout);
         // 4
         if (this.state.readyToCheckout == false) {
             return (
@@ -251,7 +272,7 @@ var Payment = React.createClass({
                     <div className = "clearfix">
                         <div className = "row">
                         <div className = "col-sm-3 col-xs-12"> </div>
-                        <PrerequisitePanel _onClick = {this._onChangeFlip} />
+                        <PrerequisitePanel _onClick = {this._onFlip} />
                         <div className = "col-sm-3 col-xs-12"> </div>
                         </div>
                     </div>
@@ -273,4 +294,4 @@ var Payment = React.createClass({
     }
 });
 
-React.render( <Payment /> , document.getElementById('container1'));
+ReactDOM.render( <Payment /> , document.getElementById('container1'));

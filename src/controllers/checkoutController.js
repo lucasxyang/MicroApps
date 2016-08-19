@@ -10,8 +10,8 @@ var validation = require('../common/validation')();
 
 var checkoutController = function () {
 
-    var validateAmount = function(amount) {
-        var amount = validation.sanitizeInput(amount);
+    var validateAmount = function(amount1) {
+        var amount = validation.sanitizeInput(amount1);
         var validationResult = validation.validateFloat(amount, true, 'amount');
         if (amount && !validationResult) {
             amount = validation.convertToFloat(amount);
@@ -39,16 +39,16 @@ var checkoutController = function () {
     var amount = 0;
     var currency = '';
     
-    var setAmount = function(newAmount) {
-        var tempAmount = fillDecimalZero(newAmount);
+    var setAmount = function(amountParam) {
+        var tempAmount = fillDecimalZero(amountParam);
         var tempError = validateAmount(tempAmount);
-        if(tempError == '' || tempError == null) {
+        if(tempError === '' || tempError === null) {
             amount = tempAmount;
         }
     };
     
-    var setCurrency = function(newCurrency) {
-        currency = newCurrency;
+    var setCurrency = function(currencyParam) {
+        currency = currencyParam;
     };
     
     

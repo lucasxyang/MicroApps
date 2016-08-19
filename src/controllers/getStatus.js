@@ -18,9 +18,9 @@ function request(callback) {
 
 	var path='/v1/checkouts/' + id + '/payment';
     // the following three lines correspond to checkout
-	path += '?authentication.userId=8a8294174b7ecb28014b9699220015cc'
-	path += '&authentication.password=sy6KJsT8'
-	path += '&authentication.entityId=8a8294174b7ecb28014b9699220015ca'
+	path += '?authentication.userId=8a8294174b7ecb28014b9699220015cc';
+	path += '&authentication.password=sy6KJsT8';
+	path += '&authentication.entityId=8a8294174b7ecb28014b9699220015ca';
 	var options = {
 		port: 443,
 		host: 'test.oppwa.com',
