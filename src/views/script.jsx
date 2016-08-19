@@ -44,9 +44,9 @@ var PrerequisitePanel = React.createClass({
         // number 0, string 0, null, empty string are invalid
         var amt = this.state.basic.amount;
         if(amt == '' || amt == 0 || amt == null || amt == '0') {
-            console.log('wrong' + amt + typeof this.state.basic.amount);
+//            console.log('wrong' + amt + typeof this.state.basic.amount);
         } else {
-            console.log(amt + typeof amt);
+//            console.log(amt + typeof amt);
             
             localStorage.clear();
             if (typeof (Storage) !== "undefined") {
@@ -106,7 +106,7 @@ var PrerequisitePanel = React.createClass({
         var diff = Math.abs(now - history);
         const HOUR_IN_MILLISECONDS = 1 * 60 * 60 * 1000;
         const TEN_SECONDS_IN_MILLISECONDS = 10 * 1000; // for testing
-        var frequencyLimit = HOUR_IN_MILLISECONDS;
+        var frequencyLimit = TEN_SECONDS_IN_MILLISECONDS;
         
 //        console.log(906);
         
@@ -156,9 +156,13 @@ var PrerequisitePanel = React.createClass({
                                     </div>
                                 </div>
                             </div>
-
-                            <div className="form-group">
-                                <input type="submit" value="Submit" className="btn btn-primary" />
+                            
+                            <div className="row">
+                                <div className="col-xs-12">
+                                    <div className="form-group">
+                                        <input id="submitBtn" type="submit" value="Submit" className="btn btn-primary center" />
+                                    </div>
+                                </div>
                             </div>
 
                         </form>
@@ -169,9 +173,9 @@ var PrerequisitePanel = React.createClass({
             else {
                 return (
                     <div className="col-sm-6 col-xs-12">
-                        <p> Do you want to donate {this.state.basic.currency} {this.state.basic.amount} ? </p>
-                        <button onClick={this.props._onClick} >Confirm</button>
-                        <button onClick={this.cancelClick} >Cancel</button>
+                        <h4 className="center"> Do you want to donate {this.state.basic.currency} {this.state.basic.amount} ? </h4>
+                        <button className="center" onClick={this.props._onClick} >Confirm</button>
+                        <button className="center" onClick={this.cancelClick} >Cancel</button>
                     </div>
                 );
             } // end of clicked if-else
