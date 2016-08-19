@@ -1,5 +1,5 @@
 /////////////////////////////////////////////////
-// Our own custom validation module.
+// Custom validation module.
 // Based on "validator" package.
 //
 // @file:   validation.js

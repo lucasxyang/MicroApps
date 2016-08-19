@@ -2,9 +2,9 @@
 https://test.oppwa.com/v1/checkouts/254257826F51439A7E86087EBB9F54F7.sbg-vm-tx01/payment
 */
 
-// This js file should only be used internally, through command line node src/controllers/getStatus
+// This js file should ONLY be used internally, through command line node src/controllers/getStatus
 // Otherwise the confirmation info will be lost
-// Remark: once this file is executed, or https://test.oppwa.com/v1/checkouts/{id}/payment is visited, user can not go back to the payment page any more
+// Remark: once this file is executed, or https://test.oppwa.com/v1/checkouts/{id}/payment is visited, user can not go back to the payment confirmation page any more
 
 var http = require('https');
 var querystring = require('querystring');

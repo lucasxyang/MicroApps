@@ -202,7 +202,8 @@ var CheckoutPanel = React.createClass({
         };
     },
     
-    // This following block of code seems to be possible placed 
+    // This following block of code seems to be possible placed (future TODO)
+    // TODO: avoid Flash of unstyled content (using $.hide and $.show etc.)
     componentDidMount: function() {
         
 //        console.log(905);

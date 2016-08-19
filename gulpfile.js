@@ -6,7 +6,6 @@ var browserify = require('browserify');
 var babel = require('gulp-babel');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
-var uglify = require('gulp-uglify');
 
 var sass = require('gulp-sass');
 
@@ -24,7 +23,7 @@ gulp.task('style', function() {
     return gulp.src(JS_Files)
         .pipe(jshint())
         .pipe(jshint.reporter('jshint-stylish', {
-            verbose: true    
+            verbose: true
         }));
 });
 

@@ -7,9 +7,9 @@
 /////////////////////////////////////////////////
 
 var express = require('express');
-var pkgJson = require('./package.json');
 var bodyParser = require('body-parser');
 var ejs = require('ejs');
+var pkgJson = require('./package.json');
 require('./src/common/logging')();
 
 // Initialize the app object based on express framework 
@@ -37,8 +37,8 @@ app.use('/api', apiRouter);
 // TODO: HTTP Error handling
 
 
-app.set('views', __dirname + '/src/views');
-app.engine('html', ejs.renderFile);
+//app.set('views', __dirname + '/src/views');
+//app.engine('html', ejs.renderFile);
 
 
 // Start the application server

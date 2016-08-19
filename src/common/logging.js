@@ -1,8 +1,7 @@
 /////////////////////////////////////////////////
 // The logging module.
 // Uses winston logging library for node.
-// Initialization and configuration for our app-
-// wide logger.
+// Initialization and configuration for logger.
 //
 // @file:   logging.js
 // @author: Xiaosiqi Yang
