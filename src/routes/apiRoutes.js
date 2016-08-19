@@ -21,11 +21,11 @@ var router = function (knex) {
     apiRouter.route('/test')
         .post(checkoutApi.acceptParams);
     
-    
-    apiRouter.get('/thank', function(req, res) {
-        res.json({ message: 'Hello World' });
+    apiRouter.get('/thank', function (req, res) {
+//        res.json({ message: 'Hello World' });
+        res.render('thank.html');
     });
-
+    
     return apiRouter;
 };
 

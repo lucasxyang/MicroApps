@@ -9,6 +9,7 @@
 var express = require('express');
 var pkgJson = require('./package.json');
 var bodyParser = require('body-parser');
+var ejs = require('ejs');
 require('./src/common/logging')();
 
 // Initialize the app object based on express framework 
@@ -26,8 +27,6 @@ var PORT = process.env.PORT || 5000;
 app.use(express.static('public'));
 app.use(express.static('src/views'));
 
-//app.set('view engine', 'ejs');
-
 // Enable reading POST data in URL-encoded and JSON formats
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -36,6 +35,11 @@ app.use(bodyParser.json());
 var apiRouter = require('./src/routes/apiRoutes')();
 app.use('/api', apiRouter);
 // TODO: HTTP Error handling
+
+
+app.set('views', __dirname + '/src/views');
+app.engine('html', ejs.renderFile);
+
 
 // Start the application server
 //

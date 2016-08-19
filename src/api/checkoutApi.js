@@ -15,11 +15,6 @@ var checkoutApi = function () {
 //        console.log('set up checkout successfully');
         checkoutController.request( function(responseData) {
             console.log(responseData);
-            
-//            if (typeof localStorage === "undefined" || localStorage === null) {
-//                localStorage = new LocalStorage('./scratch');
-//            }
-            
         });
     };
     
