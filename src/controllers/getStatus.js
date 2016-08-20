@@ -21,11 +21,11 @@ function request(callback) {
     path += '&authentication.password=sy6KJsT8';
     path += '&authentication.entityId=8a8294174b7ecb28014b9699220015ca';
     var options = {
-        port: 443
-        , host: 'test.oppwa.com'
-        , path: path
-        , method: 'GET'
-    , };
+        port: 443,
+        host: 'test.oppwa.com',
+        path: path,
+        method: 'GET',
+    };
     var postRequest = http.request(options, function (res) {
         res.setEncoding('utf8');
         res.on('data', function (chunk) {
