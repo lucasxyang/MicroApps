@@ -40,7 +40,7 @@ node_modules
 .vscode
 
 # Custom files
-#public/js/bundle.js
+public/js/bundle.js
 
 # LocalStorage temp files
 scratch

@@ -264,7 +264,8 @@ var CheckoutPanel = React.createClass({
         var thisAct = thisLoca + 'api/thank';
         console.log(thisAct);
         /*
-        
+        // Because we are in payon's test mode, the form's action can be any web address that starts with http or https (uses that protocol)
+        // https should be preferred in a real world setting. 
         <div>
             <form action="https://docs.payon.com/tutorials/integration-guide/customisation/" className="paymentWidgets">VISA MASTER AMEX DISCOVER</form>
         </div>
