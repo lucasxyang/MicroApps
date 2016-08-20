@@ -21,7 +21,7 @@ var checkoutApi = function () {
     // this displays checkout info to front end
     // used in apiRoutes
     var displayInfo = function (req, res) {
-
+        // console.log(req.headers.host);
         var localStorage = new LocalStorage('./scratch');
         // need try-catch-ish handling
         var item = null;
