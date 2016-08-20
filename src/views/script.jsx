@@ -202,6 +202,10 @@ var CheckoutPanel = React.createClass({
         };
     },
     
+    componentWillMount: function() {
+
+    },
+
     // This following block of code seems to be possible placed (future TODO)
     // TODO: avoid Flash of unstyled content (using $.hide and $.show etc.)
     componentDidMount: function() {
@@ -256,7 +260,9 @@ var CheckoutPanel = React.createClass({
     
     
     render: function() {
-        
+        var thisLoca = window.location;
+        var thisAct = thisLoca + 'api/thank';
+        console.log(thisAct);
         /*
         
         <div>
@@ -267,7 +273,7 @@ var CheckoutPanel = React.createClass({
         
         return (
             <div>
-                <form id="checkoutForm" action="http://localhost:5000/api/thank" className="paymentWidgets">VISA MASTER AMEX DISCOVER
+                <form id="checkoutForm" action={thisAct} className="paymentWidgets">VISA MASTER AMEX DISCOVER
                 </form>
             </div>
         );
