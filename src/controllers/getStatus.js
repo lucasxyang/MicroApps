@@ -12,39 +12,36 @@ var LocalStorage = require('node-localstorage').LocalStorage;
 var json1 = require('../../scratch/myStorage1.json');
 
 function request(callback) {
-
     var id = json1.id;
     console.log(id);
-
-	var path='/v1/checkouts/' + id + '/payment';
+    
+    var path = '/v1/checkouts/' + id + '/payment';
     // the following three lines correspond to checkout
-	path += '?authentication.userId=8a8294174b7ecb28014b9699220015cc';
-	path += '&authentication.password=sy6KJsT8';
-	path += '&authentication.entityId=8a8294174b7ecb28014b9699220015ca';
-	var options = {
-		port: 443,
-		host: 'test.oppwa.com',
-		path: path,
-		method: 'GET',
-	};
-	var postRequest = http.request(options, function(res) {
-		res.setEncoding('utf8');
-		res.on('data', function (chunk) {
+    path += '?authentication.userId=8a8294174b7ecb28014b9699220015cc';
+    path += '&authentication.password=sy6KJsT8';
+    path += '&authentication.entityId=8a8294174b7ecb28014b9699220015ca';
+    var options = {
+        port: 443
+        , host: 'test.oppwa.com'
+        , path: path
+        , method: 'GET'
+    , };
+    var postRequest = http.request(options, function (res) {
+        res.setEncoding('utf8');
+        res.on('data', function (chunk) {
             // need write-protection here
             localStorage = new LocalStorage('./scratch');
             localStorage.setItem('myStorage2.json', chunk);
-            
-			jsonRes = JSON.parse(chunk);
-            
+            jsonRes = JSON.parse(chunk);
             console.log(jsonRes.hasOwnProperty('id'));
             // if-else overwrite-protection
-            
-			return callback(jsonRes);
-		});
-	});
-	postRequest.end();
+            return callback(jsonRes);
+        });
+    });
+    postRequest.end();
 }
-	
-request(function(responseData) {
-	console.log(responseData);
+
+
+request(function (responseData) {
+    console.log(responseData);
 });
