@@ -106,7 +106,7 @@ var PrerequisitePanel = React.createClass({
         var diff = Math.abs(now - history);
         const HOUR_IN_MILLISECONDS = 1 * 60 * 60 * 1000;
         const TEN_SECONDS_IN_MILLISECONDS = 10 * 1000; // for testing
-        var frequencyLimit = TEN_SECONDS_IN_MILLISECONDS;
+        var frequencyLimit = HOUR_IN_MILLISECONDS;
         
 //        console.log(906);
         
